@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<!-- Nền gradient động cho các phần phía dưới -->
+<!-- Animated gradient background behind the main content sections -->
 <div class="bg" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <header>
@@ -42,10 +42,10 @@
 </header>
 
 <main>
-<!-- HOME (TRANG CHỦ) - TÍCH HỢP HIỆU ỨNG CÁ VOI 3D LÀM NỀN -->
+<!-- Home hero section with a 3D whale animation and a liquid-glass SVG displacement filter -->
 <section id="home">
   <canvas id="c"></canvas>
-  <!-- SVG Filter cho hiệu ứng kính lỏng -->
+  <!-- SVG displacement filter used to create the liquid-glass distortion effect -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
       <filter id="liquid" filterUnits="userSpaceOnUse" x="0" y="0" width="600" height="500" color-interpolation-filters="sRGB">
@@ -76,7 +76,7 @@
     </div>
   </div>
 
-  <!-- THÊM ĐOẠN MARQUEE VÀO ĐÁY TRANG CHỦ (#HOME) -->
+  <!-- Scrolling marquee displayed below the hero section -->
   <div class="hero-marquee-wrapper" id="hero-marquee">
     <div class="marquee" id="marquee-single" tabindex="0" aria-label="Thông tin cá nhân"><div class="track"></div></div>
   </div>
@@ -88,10 +88,10 @@
   <section id="skills">
     <div class="wrap">
       <h2>Kỹ năng & công cụ</h2>
-      <!-- THANH LOGO NGÔN NGỮ CHẠY VÒNG (INFINITE MARQUEE) -->
+      <!-- Infinite-scrolling strip of technology logo items -->
       <div class="marquee-container">
         <div class="marquee-track">
-          <!-- Nhóm 1 -->
+          <!-- First set of technology logo items -->
           <div class="marquee-item">HTML5</div>
           <div class="marquee-item">CSS3</div>
           <div class="marquee-item">JavaScript</div>
@@ -101,7 +101,7 @@
           <div class="marquee-item">Figma</div>
           <div class="marquee-item">VS Code</div>
           
-          <!-- Nhóm 2 -->
+          <!-- Duplicate set for seamless marquee looping -->
           <div class="marquee-item">HTML5</div>
           <div class="marquee-item">CSS3</div>
           <div class="marquee-item">JavaScript</div>

@@ -1,24 +1,24 @@
-/* ===== BIẾN MÀU (chế độ TỐI là mặc định) – muốn đổi màu cả trang, sửa tại đây ===== */
+/* ===== THEME COLORS (DARK MODE IS DEFAULT) — update here to change the entire page theme ===== */
 :root{
   color-scheme:dark;
-  --ink:#fdf8ff; --ink-soft:rgba(253,248,255,.78);      /* màu chữ chính / chữ phụ */
-  --accent:#ffd27a; --accent2:#7ae0ff;                  /* màu nhấn: vàng / xanh ngọc */
-  --glass:rgba(255,255,255,.12); --glass-strong:rgba(255,255,255,.2);  /* nền nút, tab / khi hover */
-  --edge:rgba(255,255,255,.45);                         /* viền sáng của kính */
-  --radius:26px;                                        /* độ bo góc card */
-  --bg-base:#050a1e;                                    /* màu nền dự phòng */
-  --bg-grad:linear-gradient(rgba(3,8,30,.2),rgba(3,8,30,.2)),url('nen-sao.png') center/cover,linear-gradient(180deg,#050a1e,#0b1d4a);  /* gradient nền trang */
-  --glass-bg:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.06)); /* nền khung kính */
-  --chip-bg:rgba(255,255,255,.16); --chip-bd:rgba(255,255,255,.35);     /* thẻ nhỏ (chip) */
-  --field-bg:rgba(255,255,255,.1); --ph:rgba(255,255,255,.55);          /* ô nhập form / chữ gợi ý */
+  --ink:#fdf8ff; --ink-soft:rgba(253,248,255,.78);      /* primary / secondary text colors */
+  --accent:#ffd27a; --accent2:#7ae0ff;                  /* accent colors: gold / teal */
+  --glass:rgba(255,255,255,.12); --glass-strong:rgba(255,255,255,.2);  /* button and tab backgrounds / hover state */
+  --edge:rgba(255,255,255,.45);                         /* bright glass border */
+  --radius:26px;                                        /* card corner radius */
+  --bg-base:#050a1e;                                    /* fallback background color */
+  --bg-grad:linear-gradient(rgba(3,8,30,.2),rgba(3,8,30,.2)),url('nen-sao.png') center/cover,linear-gradient(180deg,#050a1e,#0b1d4a);  /* page background gradient */
+  --glass-bg:linear-gradient(145deg,rgba(255,255,255,.22),rgba(255,255,255,.06)); /* glass panel background */
+  --chip-bg:rgba(255,255,255,.16); --chip-bd:rgba(255,255,255,.35);     /* small chip tags */
+  --field-bg:rgba(255,255,255,.1); --ph:rgba(255,255,255,.55);          /* form fields / placeholder text */
   --menu-bg:rgba(10,18,50,.88); --badge-bg:rgba(255,255,255,.2); --bar-bg:rgba(255,255,255,.15);
-  --pg-a:rgba(44,64,138,.97); --pg-b:rgba(14,22,66,.97);             /* màu giấy trang sách (2 đầu gradient) */
-  --pg-ink:#fdf8ff; --pg-soft:rgba(253,248,255,.78);                    /* chữ trên trang sách */
-  --font-body:'Be Vietnam Pro',system-ui,sans-serif;    /* font chữ thường */
-  --font-display:'Fraunces',Georgia,serif;              /* font tiêu đề */
+  --pg-a:rgba(44,64,138,.97); --pg-b:rgba(14,22,66,.97);             /* book page colors (two gradient ends) */
+  --pg-ink:#fdf8ff; --pg-soft:rgba(253,248,255,.78);                    /* text on the book page */
+  --font-body:'Be Vietnam Pro',system-ui,sans-serif;    /* body font */
+  --font-display:'Fraunces',Georgia,serif;              /* heading font */
 }
 
-/* ===== CHẾ ĐỘ SÁNG: chỉ ghi đè các biến ở trên khi <html data-theme="light"> ===== */
+/* ===== LIGHT MODE: override the variables above when <html data-theme="light"> is used ===== */
 :root[data-theme="light"]{
   color-scheme:light;
   --ink:#2a1b4d; --ink-soft:rgba(42,27,77,.74); --accent:#d9651e; --accent2:#0a7fae;
@@ -31,20 +31,20 @@
   --pg-a:rgba(255,255,255,.98); --pg-b:rgba(236,228,255,.97); --pg-ink:#2a1b4d; --pg-soft:rgba(42,27,77,.75);
 }
 
-/* Bóng đổ của kính nhẹ hơn trong chế độ sáng */
+/* Softer glass shadow in light mode */
 :root[data-theme="light"] .glass{box-shadow:inset 0 1.5px 0 #fff,inset 0 -1.5px 0 rgba(255,255,255,.5),0 10px 20px rgba(90,70,160,.15),0 30px 60px rgba(90,70,160,.2)}
 :root[data-theme="light"] .badge{box-shadow:0 1px 4px rgba(90,70,160,.2)}
 
-/* ===== NÚT ĐỔI SÁNG/TỐI + NGÔN NGỮ trên thanh menu ===== */
+/* ===== THEME TOGGLE + LANGUAGE SWITCHER IN THE MENU ===== */
 .tools{display:flex;gap:8px;margin-left:12px}
 .tool{min-width:42px;height:38px;padding:0 12px;border-radius:999px;border:1px solid var(--edge);background:var(--glass);color:var(--ink);
   font:600 .85rem var(--font-body);cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.6);transition:transform .25s,background .25s}
 .tool:hover{transform:translateY(-2px);background:var(--glass-strong)}
 
-/* Chế độ tối: ẩn các đốm màu để ảnh bầu trời sao rõ nét */
+/* Dark mode: hide the colored blobs so the starry sky remains crisp */
 :root:not([data-theme="light"]) .bg span{display:none}
 
-/* ===== COMBO BOX CHỌN NGÔN NGỮ: bấm nút để mở danh sách, bấm vào ngôn ngữ để chuyển ===== */
+/* ===== LANGUAGE SELECT COMBO BOX: click the button to open the list and select a language to switch ===== */
 .lang{position:relative}
 .lang-btn{display:flex;align-items:center;gap:6px}
 .lang-btn .caret{transition:transform .25s;font-size:.75rem}
@@ -56,7 +56,7 @@
 .lang-list li:hover,.lang-list li:focus-visible{background:var(--glass-strong);outline:none}
 .lang-list li[aria-selected="true"]{font-weight:600;color:var(--accent)}
 .lang-list li[aria-selected="true"]::after{content:"✓"}
-@media (max-width:480px){.lang-btn .nm{display:none}} /* điện thoại nhỏ: chỉ hiện biểu tượng 🌐 cho gọn */
+@media (max-width:480px){.lang-btn .nm{display:none}} /* small phones: show only the globe icon for a compact layout */
 
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:90px}
@@ -66,7 +66,7 @@ body{
   overflow-x:hidden;
 }
 
-/* Nền gradient động, sắc nét cho toàn trang ở các phần dưới */
+/* Dynamic, sharp gradient background for the lower sections of the page */
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;
   background:var(--bg-grad)}
 .bg span{position:absolute;border-radius:50%;filter:blur(60px);opacity:.75;animation:float 18s ease-in-out infinite alternate}
@@ -87,18 +87,18 @@ h2{font-family:var(--font-display);font-size:clamp(1.9rem,4vw,2.8rem);margin-bot
   position: relative;
   background: var(--glass-bg);
   -webkit-backdrop-filter: blur(4px) saturate(140%);
-  /* Kết nối với bộ lọc SVG #liquid để tạo hiệu ứng bẻ cong viền kính */
+  /* Connect to the SVG #liquid filter to bend the glass edge */
   backdrop-filter: blur(4px) url(#liquid) saturate(150%) brightness(1.06);
   border: 1px solid var(--edge);
   border-radius: var(--radius);
-  /* Đổ bóng 3D di chuyển động theo chuột (qua biến --sx và --sy) */
+  /* 3D drop shadow that reacts to pointer movement through --sx and --sy */
   box-shadow: 
     var(--sx, 0px) calc(var(--sy, 0px) + 30px) 50px -8px rgba(0,0,0,.4),
     inset 0 -15px 25px -15px rgba(255,255,255,.2),
     inset 0 15px 20px -15px rgba(255,255,255,.3);
   transition: transform .15s ease-out;
 }
-/* vệt phản chiếu theo chuột */
+/* mouse-following reflection highlight */
 .glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.35),transparent 60%);
   opacity:0;transition:opacity .3s}
@@ -123,7 +123,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:10px 1
 .btn.primary{background:linear-gradient(135deg,#ffd27a,#ff9f7a);color:#3a1b50;border-color:#fff8}
 .btn.sm{padding:8px 18px;font-size:.85rem}
 
-/* ===== Hero Section kèm Cá Voi 3D ===== */
+/* ===== Hero Section with 3D Whale Animation ===== */
 #home {
   position: relative;
   width: 100vw;
@@ -133,10 +133,10 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:10px 1
   align-items: center;
   overflow: hidden;
   background: #040a16;
-  padding: 0 !important; /* Xóa sạch padding thừa của thẻ section chung */
+  padding: 0 !important; /* Remove extra padding from the shared section wrapper */
 }
 
-/* Canvas cá voi 3D phủ kín phần Trang chủ */
+/* Full-coverage 3D whale canvas in the home section */
 #c {
   position: absolute;
   top: 0;
@@ -150,7 +150,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:10px 1
 .hero-container{
   position:relative;z-index:1;width:min(1120px,92%);margin-inline:auto;
   display:grid;
-  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); /* cho phép cột co lại */
+  grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); /* allow the columns to compress */
   gap:32px;align-items:center;
 }
 .hero-card{padding:clamp(28px,4vw,48px) !important}
@@ -178,14 +178,14 @@ aspect-ratio: 1;
   display: block; 
   padding: 0;
 }
-/* Thẻ ảnh bên trong khung */
+/* image card inside the frame */
 .avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover; 
   display: block;
 }
-/* ===== Main content các phần dưới (giữ nguyên nền tiêu chuẩn) ===== */
+/* ===== Lower content sections (keep the standard page background) ===== */
 .main-content{
   position:relative;
   z-index:2;
@@ -203,7 +203,7 @@ aspect-ratio: 1;
 .panel li::before{content:"";position:absolute;left:0;top:.7em;width:8px;height:8px;border-radius:50%;background:var(--accent)}
 .panel li b{color:var(--ink)}
 
-/* ===== Flip Book 3D (trang uốn cong theo dải) ===== */
+/* ===== 3D Flip Book (curved pages) ===== */
 .book-frame{outline-offset:6px;touch-action:pan-y}
 .scene{perspective:2200px;width:100%}
 .book{user-select:none;-webkit-user-select:none;position:relative;width:100%;aspect-ratio:3/2;transition:transform .8s ease;transform:translateX(-25%);transform-style:preserve-3d}
@@ -215,7 +215,7 @@ aspect-ratio: 1;
 .sb{transform:rotateY(180deg)}
 .sf::after,.sb::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--a,0));pointer-events:none}
 .pgw{position:absolute;top:0;height:100%}
-/* trang kính: viền sáng + inset shadow, đủ đặc để không lộ các tờ phía sau */
+/* glass page: bright border + inset shadow, strong enough to hide the pages behind it */
 .pg,.page{box-sizing:border-box;display:flex;flex-direction:column;border:0;color:var(--pg-ink);
   background:
     radial-gradient(circle at 88% 6%,rgba(255,210,122,.30),transparent 38%),
@@ -229,7 +229,7 @@ aspect-ratio: 1;
 .pg.photo{justify-content:flex-end;align-items:stretch;padding:clamp(14px,2.4vw,28px)}
 .pg.photo .cv{background:rgba(30,10,70,.4);padding:12px 18px;border-radius:16px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
 .pg.photo .ptext{margin-bottom:6px}
-.pg.cover .ptitle,.pg.cover .ptext{color:#fff} /* chữ trên bìa luôn trắng ở cả 2 chế độ */
+.pg.cover .ptitle,.pg.cover .ptext{color:#fff} /* cover text remains white in both light and dark modes */
 .cv{display:flex;flex-direction:column;align-items:center;gap:10px}
 .page{position:relative;padding:20px;border-radius:22px}
 .page.R{padding:12px}
@@ -320,7 +320,7 @@ footer{text-align:center;padding:56px 0 40px;color:var(--ink-soft);font-size:.9r
 }
 @media (hover:none){.tilt{transform:none!important}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
-/* ===== HIỆU ỨNG CHỮ GRADIENT & LƠ LỬNG (WAVE) ===== */
+/* ===== GRADIENT WAVE TEXT EFFECT ===== */
 
 .wave{
   display:block;
@@ -335,16 +335,16 @@ footer{text-align:center;padding:56px 0 40px;color:var(--ink-soft);font-size:.9r
 
 .wave span {
   display: inline-block;
-  /* Màu chữ Gradient rực rỡ */
+  /* vibrant gradient text color */
   background: linear-gradient(135deg, #28b191, #7ac2b4, #3225bc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   
-  /* Hiệu ứng chuyển động lơ lửng lên xuống */
+  /* floating up-and-down motion effect */
   animation: waveFloat 2.5s ease-in-out infinite;
 }
 
-/* Tạo độ trễ (delay) khác nhau cho từng chữ cái để tạo sóng lượn sóng tự nhiên */
+/* stagger the delay between letters to create a natural wave motion */
 .wave span:nth-child(1)  { animation-delay: 0.0s; }
 .wave span:nth-child(2)  { animation-delay: 0.1s; }
 .wave span:nth-child(3)  { animation-delay: 0.2s; }
@@ -363,16 +363,16 @@ footer{text-align:center;padding:56px 0 40px;color:var(--ink-soft);font-size:.9r
 .wave span:nth-child(16) { animation-delay: 1.5s; }
 .wave span:nth-child(17) { animation-delay: 1.6s; }
 
-/* Keyframes cho hiệu ứng lơ lửng lên xuống */
+/* keyframes for the floating up-and-down motion */
 @keyframes waveFloat {
   0%, 100% {
     transform: translateY(0px);
   }
   50% {
-    transform: translateY(-8px); /* Độ cao bay lên (-8px) */
+    transform: translateY(-8px); /* lift height (-8px) */
   }
 }
-/* 1. Chỉ hero-card và avatar dùng bộ lọc liquid, các khung kính khác dùng blur thường */
+/* 1. Only the hero card and avatar use the liquid filter; other glass panels use standard blur */
 .glass{
   -webkit-backdrop-filter: blur(14px) saturate(150%);
   backdrop-filter: blur(14px) saturate(150%) brightness(1.06);
@@ -381,19 +381,19 @@ footer{text-align:center;padding:56px 0 40px;color:var(--ink-soft);font-size:.9r
   backdrop-filter: blur(4px) url(#liquid) saturate(150%) brightness(1.06);
 }
 
-/* 2. Thanh menu ở chế độ sáng: nền trắng đục để chữ tối luôn rõ, dù nằm trên hero tối hay nền sáng */
+/* 2. Light-mode menu: translucent white background keeps dark text readable on both dark hero and light backgrounds */
 :root[data-theme="light"] nav.glass{
   background: rgba(255,255,255,.82);
 }
 
-/* 3. Header cố định, để hero phủ kín từ mép trên */
+/* 3. Fixed header keeps the hero covering the top edge */
 header{
   position: fixed;
   top: 12px; left: 0; right: 0;
   margin: 0;
   z-index: 50;
 }
-/* ===== THANH NGÔN NGỮ CHẠY VÒNG (INFINITE MARQUEE) ===== */
+/* ===== INFINITE LANGUAGE SCROLL BAR ===== */
 .marquee-container {
   position: relative;
   width: 100%;
@@ -411,7 +411,7 @@ header{
   animation: scrollMarquee 25s linear infinite;
 }
 
-/* Hiệu ứng dừng lại khi rê chuột vào để người dùng dễ nhìn */
+/* pause on hover so users can read it more easily */
 .marquee-container:hover .marquee-track {
   animation-play-state: paused;
 }
@@ -436,15 +436,15 @@ header{
   color: var(--accent);
   border-color: var(--accent);
 }
-/* ===== TRẠNG THÁI KHI CLICK (SÁNG ĐÈN & VIỀN GỜ RỰC RỠ) ===== */
+/* ===== CLICK STATE (LIGHT/DARK AND HIGHLIGHTED BORDER) ===== */
 .marquee-item.active {
   background: linear-gradient(145deg, rgba(255, 210, 122, 0.2), rgba(255, 255, 255, 0.08));
-  border-color: var(--accent); /* Đổi viền sang màu vàng chủ đạo */
-  color: var(--accent); /* Đổi màu chữ sang màu sáng */
+  border-color: var(--accent); /* change the border to the primary gold accent */
+  color: var(--accent); /* change the text color to the bright accent */
   box-shadow: 0 0 25px rgba(255, 210, 122, 0.45), inset 0 0 12px rgba(255, 210, 122, 0.25);
   transform: scale(1.06);
 }
-/* Keyframes chạy vòng tròn vô tận */
+/* keyframes for continuous looping */
 @keyframes scrollMarquee {
   0% {
     transform: translateX(0);
@@ -453,7 +453,7 @@ header{
     transform: translateX(-50%);
   }
 }
-/* ===== MARQUEE TRONG HERO (TRANG CHỦ - 1 HÀNG) ===== */
+/* ===== HERO MARQUEE (HOME - SINGLE ROW) ===== */
 #home {
   flex-direction: column;
   justify-content: center;
@@ -461,7 +461,7 @@ header{
 
 .hero-marquee-wrapper {
   position: absolute;
-  bottom: 25px; /* Vị trí 1 hàng sát đáy màn hình */
+  bottom: 25px; /* single-row position near the bottom edge of the viewport */
   left: 0;
   width: 100%;
   z-index: 2;
@@ -475,7 +475,7 @@ header{
   pointer-events: auto;
 }
 
-/* Class ẩn khi cuộn xuống dưới */
+/* hidden class when scrolling below */
 .hero-marquee-wrapper.fade-out {
   opacity: 0;
   visibility: hidden;
@@ -483,7 +483,7 @@ header{
   pointer-events: none;
 }
 
-/* Kiểu dáng đường viền và phông chữ Marquee */
+/* marquee border and typography styling */
 .hero-marquee-wrapper .marquee {
   overflow: hidden;
   border-block: 1px solid var(--edge);
@@ -524,7 +524,7 @@ header{
   flex: none;
 }
 .hero-marquee-wrapper .sep path { fill: currentColor; }
-/* KEYFRAMES ĐỂ CHỮ CHẠY TỪ PHẢI SANG TRÁI */
+/* KEYFRAMES FOR TEXT SCROLLING FROM RIGHT TO LEFT */
 @keyframes slide {
   0% {
     transform: translateX(0);
@@ -588,12 +588,12 @@ header{
 .lang-list li[aria-selected="true"]::after{margin-left:auto}
 .tool{display:inline-flex;align-items:center;justify-content:center}
 .tool svg{display:block}
-/* Lướt theo tay: JS tự animate nên tắt transition của CSS */
+/* drag/swipe interaction: JS handles motion, so CSS transitions are disabled */
 .carousel .card{transition:none;will-change:transform,opacity}
 #projects-grid.carousel{overflow:visible}
 #projects-grid.carousel.dragging{cursor:grabbing}
-/* ===== TIMELINE: hiệu ứng khi cuộn ===== */
-/* Đường nền mờ + đường sáng chạy theo thanh cuộn */
+/* ===== TIMELINE: scroll reveal effect ===== */
+/* faint background line + bright line that follows scroll progress */
 .timeline::before{opacity:.18}
 .timeline::after{
   content:"";position:absolute;left:7px;top:8px;width:2px;border-radius:2px;
@@ -602,7 +602,7 @@ header{
   box-shadow:0 0 12px var(--accent);
 }
 
-/* Thẻ ẩn sẵn, trượt vào khi cuộn tới (dùng 'translate' để không đụng rule transform của .tilt) */
+/* cards remain hidden and slide into view when reached; use translate instead of overwriting the .tilt transform rule */
 .tl.rv{
   opacity:0;
   translate:60px 24px;
@@ -611,7 +611,7 @@ header{
 }
 .tl.rv.in{opacity:1;translate:0 0}
 
-/* Chấm vàng bật lên */
+/* bright gold dot activates */
 .tl.rv::before{
   scale:0;
   transition:scale .5s cubic-bezier(.3,1.6,.5,1) .25s;

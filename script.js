@@ -1,5 +1,5 @@
 (() => {
-  /* 0. GIAO DIỆN SÁNG/TỐI + ĐỔI NGÔN NGỮ (VI/EN) */
+  /* 0. THEME + LANGUAGE TOGGLE (VI/EN) */
   const root = document.documentElement;
   const tr = (vi, en) => root.lang === 'en' ? en : vi;
   const save = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
@@ -72,7 +72,7 @@
     'Gửi tin nhắn':'Send message',
     '© 2026 Nguyễn Phạm Y Huỳnh. Thiết kế và code bằng HTML, CSS, JavaScript thuần.':'© 2026 Nguyen Pham Y Huynh. Designed and coded with plain HTML, CSS and JavaScript.',
 
-    // Bản dịch bổ sung cho thanh thông tin chạy ngang
+    // Additional translations for the marquee info bar
     'Sở thích':'Interests',
     'Tìm hiểu công nghệ mới':'Exploring new technologies',
     'Thích biến ý tưởng thành sản phẩm':'Love turning ideas into products',
@@ -85,7 +85,7 @@
   };
 
   function applyLanguage(l) {
-    // Quét động toàn bộ văn bản mỗi lần bấm chuyển ngôn ngữ
+    // Dynamically scan all text each time the language switch is triggered
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
 
     while (walker.nextNode()) {
@@ -140,20 +140,19 @@
 
     save('pf-theme', t);
   }
-    /* Cờ quốc gia (SVG) */
+    /* Country flags (SVG) */
   const FLAGS = {
     vi: '<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#da251d"/><polygon fill="#ffff00" points="15,4 16.35,8.14 20.71,8.15 17.19,10.71 18.53,14.85 15,12.3 11.47,14.85 12.81,10.71 9.29,8.15 13.65,8.14"/></svg>',
     en: '<svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8"/><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3"/><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="13"/><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="8"/></svg>'
   };
 
-  // Cờ trong danh sách xổ xuống (chạy 1 lần)
+  // Flags inside the dropdown list (render once)
   document.querySelectorAll('[data-flag]').forEach(el => {
     el.innerHTML = FLAGS[el.dataset.flag];
   });
 
   function setLang(l) {
-    root.lang = l;
-    applyLanguage(l);
+    root.lang = l;    applyLanguage(l);
 
     langName.textContent = l === 'en' ? 'English' : 'Tiếng Việt';
     document.getElementById('lang-flag').innerHTML = FLAGS[l];
@@ -166,7 +165,7 @@
 
     save('pf-lang', l);
 
-    // Thông báo để các thành phần cần thiết cập nhật ngôn ngữ
+    // Notify dependent components to refresh their language-dependent content
     document.dispatchEvent(new Event('langchange'));
   }
 
@@ -213,7 +212,7 @@
   setLang(load('pf-lang') === 'en' ? 'en' : 'vi');
 
 
-  /* 1. Tilt 3D theo chuột + vệt sáng phản chiếu */
+  /* 1. 3D tilt on mouse movement + reflective highlight */
   const heroCards = document.querySelectorAll('.hero-card, .hero-container .avatar');
   const filter = document.getElementById('liquid');
   const feImg = document.getElementById('dispMap');
@@ -307,7 +306,7 @@
     new ResizeObserver(buildLiquidMap).observe(heroCards[0]);
   }
 
-  // Xoay 3D nghiêng theo chuột riêng cho 2 card Hero
+  // Independent 3D tilt on mouse movement for both hero cards
   document.addEventListener('mousemove', e => {
     heroCards.forEach(card => {
       const r = card.getBoundingClientRect();
@@ -351,7 +350,7 @@
   });
 
 
-  /* 3. Đánh dấu mục menu đang xem */
+  /* 3. Highlight the active menu item */
   const links = [...document.querySelectorAll('.menu a')];
 
   const io = new IntersectionObserver(entries => {
@@ -370,7 +369,7 @@
   document.querySelectorAll('main section').forEach(s => io.observe(s));
 
 
-  /* 4. Bộ lọc Skills & Projects */
+  /* 4. Skills & Projects filters */
   document.querySelectorAll('[data-filter]').forEach(bar => {
     const grid = document.getElementById(bar.dataset.filter + '-grid');
 
@@ -392,7 +391,7 @@
   });
 
 
-  /* 5. Thanh kỹ năng chạy khi cuộn tới */
+  /* 5. Animated skill bars when they enter view */
   const bio = new IntersectionObserver(es => {
     es.forEach(en => {
       if (en.isIntersecting) {
@@ -405,7 +404,7 @@
   document.querySelectorAll('.bar i').forEach(b => bio.observe(b));
 
 
-  /* 7. Form liên hệ */
+  /* 7. Contact form */
   const form = document.getElementById('contact-form');
   const status = form.querySelector('.status');
 
@@ -438,7 +437,7 @@
   });
 })();
 
-/* ===== 6. SCRIPT HIỆU ỨNG CÁ VOI 3D (CHỈ CHẠY Ở PHẦN TRANG CHỦ) ===== */
+/* ===== 6. 3D WHALE EFFECT SCRIPT (RUNS ONLY ON THE HOME SECTION) ===== */
   const cv = document.getElementById('c');
   const ctx = cv.getContext('2d');
 
@@ -903,12 +902,12 @@ cv.addEventListener('pointermove', e => {
   mouse.x = e.clientX - rect.left;
   mouse.y = e.clientY - rect.top;
 });
-  /* Hiệu ứng click sáng đèn cho các thẻ ngôn ngữ chạy vòng (Marquee) */
+  /* Click highlight effect for the looping language tags (Marquee) */
   const marqueeItems = document.querySelectorAll('.marquee-item');
 
   marqueeItems.forEach(item => {
     item.addEventListener('click', () => {
-      // Bấm vào thẻ nào thì bật sáng thẻ đó (và tự động tắt sáng các thẻ khác)
+      // Click a tag to highlight it and automatically clear the others
       marqueeItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
     });
@@ -916,7 +915,7 @@ cv.addEventListener('pointermove', e => {
 
 
  (() => {
-  /* 6. Tạo thanh thông tin chạy ngang (Marquee) */
+  /* 6. Create the horizontal info marquee */
   const singleList = [
     { period: '2026', title: 'Sẵn sàng học hỏi', place: 'Tìm hiểu công nghệ mới' },
     { period: 'Sở thích', title: 'Design UI/UX', place: 'Thích biến ý tưởng thành sản phẩm' },
@@ -959,7 +958,7 @@ const marqueeTr = text =>
       </div>${sepSVG}`
     ).join('');
 
-    // Giữ cấu trúc track để CSS tiếp tục tạo hiệu ứng chạy
+    // Keep the track structure so CSS can continue the scrolling animation
     track.innerHTML =
       `<div class="set" style="display:flex">${html}</div>` +
       `<div class="set" style="display:flex" aria-hidden="true">${html}</div>`;
@@ -995,7 +994,7 @@ const marqueeTr = text =>
     );
   }
 
-  // Khởi tạo thanh chạy sau khi DOM và font sẵn sàng
+  // Initialize the scrolling bar after the DOM and fonts are ready
   function startMarquee() {
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(initMarquee);
@@ -1010,10 +1009,10 @@ const marqueeTr = text =>
     startMarquee();
   }
 
-  // Cập nhật nội dung khi chuyển ngôn ngữ
+  // Refresh content when the language changes
   document.addEventListener('langchange', initMarquee);
 
-  // Hiệu ứng mờ dần khi cuộn khỏi Trang chủ
+  // Fade-out effect when scrolling away from the home section
   const marqueeWrapper = document.getElementById('hero-marquee');
   const homeSection = document.getElementById('home');
 
@@ -1031,7 +1030,7 @@ const marqueeTr = text =>
     observer.observe(homeSection);
   }
 })();
-/* ===== PROJECTS: CAROUSEL 3D (lướt theo tay) ===== */
+/* ===== PROJECTS: 3D CAROUSEL (drag/swipe) ===== */
 (() => {
   const grid = document.getElementById('projects-grid');
   if (!grid) return;
@@ -1040,7 +1039,7 @@ const marqueeTr = text =>
   const countEl = document.getElementById('car-count');
   const tabs = document.querySelector('[data-filter="projects"]');
 
-  let pos = 0, target = 0, raf = null;           // pos = vị trí hiện tại (số thực), target = card đích
+  let pos = 0, target = 0, raf = null;           // pos = current position (float), target = destination card
   let dragging = false, moved = false;
   let startX = 0, startPos = 0, lastX = 0, lastT = 0, vel = 0;
 
@@ -1098,7 +1097,7 @@ const marqueeTr = text =>
     if (e.key === 'ArrowLeft')  { e.preventDefault(); prev(); }
   });
 
-  /* ---- Kéo / vuốt: card chạy theo tay ---- */
+  /* ---- Drag/swipe: cards follow the pointer ---- */
   grid.addEventListener('dragstart', e => e.preventDefault());
 
   grid.addEventListener('pointerdown', e => {
@@ -1125,14 +1124,14 @@ const marqueeTr = text =>
     const step = stepPx();
     const now = performance.now();
     const dt = Math.max(1, now - lastT);
-    vel = vel * .8 + ((lastX - e.clientX) / step / dt) * .2;   // đơn vị: card / ms
+    vel = vel * .8 + ((lastX - e.clientX) / step / dt) * .2;   // unit: cards / ms
     lastX = e.clientX;
     lastT = now;
 
     let p = startPos - dx / step;
     const max = maxIdx();
-    if (p < 0)   p = p * .35;                  // đàn hồi ở đầu
-    if (p > max) p = max + (p - max) * .35;    // đàn hồi ở cuối
+    if (p < 0)   p = p * .35;                  // spring-back at the start
+    if (p > max) p = max + (p - max) * .35;    // spring-back at the end
     pos = p;
     render();
   });
@@ -1143,7 +1142,7 @@ const marqueeTr = text =>
     grid.classList.remove('dragging');
     if (!moved) return;
 
-    // quán tính: lướt nhanh thì đi xa hơn (tối đa 2 card)
+    // inertia: faster swipes travel further (up to 2 cards)
     const boost = Math.max(-2, Math.min(2, vel * 250));
     go(pos + boost);
     setTimeout(() => { moved = false; }, 50);
@@ -1151,10 +1150,10 @@ const marqueeTr = text =>
   addEventListener('pointerup', endDrag);
   addEventListener('pointercancel', endDrag);
 
-  /* ---- Touchpad / chuột lăn ngang ---- */
+  /* ---- Touchpad / mouse horizontal scroll ---- */
   let wheelT;
   grid.addEventListener('wheel', e => {
-    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;   // cuộn dọc thì để trang cuộn bình thường
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;   // let vertical scrolling behave normally
     e.preventDefault();
     cancelAnimationFrame(raf);
     pos = Math.max(-.3, Math.min(pos + e.deltaX / (stepPx() * 1.2), maxIdx() + .3));
@@ -1163,7 +1162,7 @@ const marqueeTr = text =>
     wheelT = setTimeout(() => go(pos), 120);
   }, { passive: false });
 
-  /* ---- Bấm card bên cạnh -> đưa ra giữa; vừa kéo xong thì không bấm nhầm ---- */
+  /* ---- Click adjacent card -> bring it to center; ignore accidental taps right after dragging ---- */
   grid.addEventListener('click', e => {
     if (moved) { e.preventDefault(); e.stopPropagation(); return; }
     const card = e.target.closest('.card');
@@ -1173,7 +1172,7 @@ const marqueeTr = text =>
     go(visible().indexOf(card));
   }, true);
 
-  /* ---- Đổi tab lọc -> về card đầu ---- */
+  /* ---- Change the filter tab -> return to the first card ---- */
   tabs?.addEventListener('click', () => {
     requestAnimationFrame(() => { pos = target = 0; render(); });
   });
@@ -1181,13 +1180,13 @@ const marqueeTr = text =>
   addEventListener('resize', render);
   render();
 })();
-/* ===== TIMELINE: hiện dần + đường chạy theo thanh cuộn ===== */
+/* ===== TIMELINE: fade in + progress line tied to scroll ===== */
 (() => {
   const tl = document.querySelector('.timeline');
   if (!tl) return;
 
   const items = [...tl.querySelectorAll('.tl')];
-  items.forEach(el => el.classList.add('rv'));   // thêm class bằng JS: tắt JS thì thẻ vẫn hiện bình thường
+  items.forEach(el => el.classList.add('rv'));   // add the class via JS: without JS, the cards remain visible by default
 
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => {
